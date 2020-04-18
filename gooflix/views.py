@@ -13,8 +13,8 @@ async def index(request):
 @aiohttp_jinja2.template('index.html')
 async def titles(request):
     data = {**dict(request.query), **dict(request.cookies)}
-    netflix_id = data.get('NetflixId',False)
-    secure_netflix_id = data('SecureNetflixId', False)
+    netflix_id = data.get('NetflixId', False)
+    secure_netflix_id = data.get('SecureNetflixId', False)
     query = data['Query']
 
     has_cookies = netflix_id and secure_netflix_id
