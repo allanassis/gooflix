@@ -1,6 +1,6 @@
 import aiohttp_jinja2
 
-from request import get_titles
+from gooflix.request import get_titles
 
 
 @aiohttp_jinja2.template('index.html')

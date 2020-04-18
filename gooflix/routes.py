@@ -1,4 +1,4 @@
-from views import index, titles
+from gooflix.views import index, titles
 
 
 def setup_routes(app):
