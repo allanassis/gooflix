@@ -4,7 +4,9 @@ import aiohttp_jinja2
 import jinja2
 from aiohttp import web
 
-from routes import setup_routes
+from gooflix.routes import setup_routes
+
+BASE_DIR = pathlib.Path(__file__).parent.parent
 
 
 def setup_static_routes(app):
@@ -13,16 +15,15 @@ def setup_static_routes(app):
                           name='static')
 
 
-app = web.Application()
+def setup_app():
 
-BASE_DIR = pathlib.Path(__file__).parent.parent
+    app = web.Application()
 
+    aiohttp_jinja2.setup(
+        app,
+        loader=jinja2.FileSystemLoader(str(BASE_DIR / 'gooflix' / 'templates'))
+        )
 
-aiohttp_jinja2.setup(
-    app,
-    loader=jinja2.FileSystemLoader(str(BASE_DIR / 'gooflix' / 'templates'))
-    )
-
-setup_static_routes(app)
-setup_routes(app)
-web.run_app(app)
+    setup_static_routes(app)
+    setup_routes(app)
+    return app
