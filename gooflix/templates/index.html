@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./style.css"/>
-    <title>Document</title>
-</head>
-<body>
-    <section>
-        <article>
-            <div>
-                <label>NetflixId: </label>
-                <input id="NetflixId" type="text">
-            </div>
-            <div>
-                <label>SecureNetflixId: </label>
-                <input id="SecureNetflixId" type="text">
-            </div>
-        </article>
-        <article>
-            <div>
-                <label>Busca:</label>
-                <input id="query" type="text">
-                <button id="btn_find">Buscar</button>
-            </div>
-        </article>
-    </section>
-    <script src="./index.js"></script>
-</body>
-</html>
+<link href="/static/style.css" rel="stylesheet"/>
+<form action="/title" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+    <div id="CookiesContainer">
+        {% if not cookies %}
+            <label for="NetflixId">NetflixId</label>
+            <input id="NetflixId" name="NetflixId" type="text" value="" autofocus />
+            <label for="SecureNetflixId">SecureNetflixId</label>
+            <input id="SecureNetflixId" name="SecureNetflixId" type="text" value="" />
+            <button id="SaveCookies" name="SaveCookies" type="button">salvar</button>
+        {% endif %}
+    </div>
+
+    <div id="QueryContainer">
+        {% if cookies %}
+            <label for="Query">Busca</label>
+            <input id="Query" name="Query" type="text" value="">
+            <input type="submit" value="buscar" />
+        {% endif %}
+    </div>
+
+    <div>
+        {% if titles %}
+            <ul>
+                {% for key, title in titles %}
+                    <li><small>{{key}}</small>:      <strong>{{ title["title"]["value"] }}</strong></li>
+                 {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</form>
+<script src="/static/script.js"></script>
