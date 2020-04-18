@@ -1,1 +1,1 @@
-web: gunicorn 'gooflix.main:setup_app()' --bind localhost:8080 --worker-class aiohttp.GunicornWebWorker
+web: gunicorn 'gooflix.main:setup_app()' --bind localhost:$PORT --worker-class aiohttp.GunicornWebWorker
